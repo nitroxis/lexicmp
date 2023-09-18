@@ -11,8 +11,8 @@ macro_rules! cmp_ascii_digits {
                 $iter2.peek().copied().filter(|c| c.is_ascii_digit()),
             ) {
                 (Some(lhs), Some(rhs)) => {
-                    n1 = n1 * 10 + ascii_to_u64(lhs);
-                    n2 = n2 * 10 + ascii_to_u64(rhs);
+                    n1 = n1.saturating_mul(10).saturating_add(ascii_to_u64(lhs));
+                    n2 = n2.saturating_mul(10).saturating_add(ascii_to_u64(rhs));
                     let _ = $iter1.next();
                     let _ = $iter2.next();
                 }
